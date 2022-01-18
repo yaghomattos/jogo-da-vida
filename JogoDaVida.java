@@ -3,17 +3,46 @@ import java.util.Scanner;
 
 public class JogoDaVida {
 
-	public static int[][] initialRandom() {
+	public static int[][] initialRandom(int x) {
 		Random random = new Random();
-		int board[][] = new int [6][6]; 
+		int board[][] = new int [6][6];
+		int number = Math.abs(x);
 		
-		for(int i = 0; i < 6; i++) {
-			for(int j = 0; j < 6; j++) {
-				board[i][j] = random.nextInt(2);
+		if(x < 0) {
+			for(int i = 0; i < 6; i++) {
+				for(int j = 0; j < 6; j++) {
+					board[i][j] = x - random.nextInt(number);
+				}
 			}
 		}
-		
+		else {
+			for(int i = 0; i < 6; i++) {
+				for(int j = 0; j < 6; j++) {
+					board[i][j] = random.nextInt(x);
+				}
+			}
+		}
+			
 		return board;
+	}
+
+	public static void newState(int auxBoard[][], int board[][]) {
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				// quina = 3 vizinhos
+				if(i == 0 && j == 0 || i == 0 && j == 5 || i == 5 && j == 0 || i == 5 && j == 5) {
+					board[i][j] = corner(i, j, auxBoard);
+				}
+				// parede = 5 vizinhos
+				else if(i == 0 || i == 5 || j == 0 || j == 5) {
+					board[i][j] = wall(i, j, auxBoard);
+				}
+				// 8 vizinhos
+				else {
+					board[i][j] = core(i, j, auxBoard);
+				}	
+			}
+		}
 	}
 	
 	public static int corner(int i, int j, int[][] auxBoard) {
@@ -127,7 +156,7 @@ public class JogoDaVida {
 	public static void main(String[] args) {
 		int board[][] = new int [6][6]; 
 		
-		board = initialRandom();
+		board = initialRandom(2);
 		
 		System.out.println("Estado inicial:");
 		for(int i = 0; i < 6; i++) {
@@ -138,7 +167,7 @@ public class JogoDaVida {
 		}
 		
 		while(true) {
-			int[][] auxBoard = new int [6][6]; 
+			int auxBoard[][] = new int [6][6]; 
 		
 			for(int i = 0; i < 6; i++) {
 				for(int j = 0; j < 6; j++) {
@@ -146,23 +175,8 @@ public class JogoDaVida {
 				}
 			}
 			
-			for(int i = 0; i < 6; i++) {
-				for(int j = 0; j < 6; j++) {
-					// quina = 3 vizinhos
-					if(i == 0 && j == 0 || i == 0 && j == 5 || i == 5 && j == 0 || i == 5 && j == 5) {
-						board[i][j] = corner(i, j, auxBoard);
-						//System.out.print(quina(i, j, auxBoard) + "quina \n");
-					}
-					// parede = 5 vizinhos
-					else if(i == 0 || i == 5 || j == 0 || j == 5) {
-						board[i][j] = wall(i, j, auxBoard);
-					}
-					// 8 vizinhos
-					else {
-						board[i][j] = core(i, j, auxBoard);
-					}	
-				}
-			}
+			newState(auxBoard, board);
+			
 			System.out.println("Novo Estado:");
 			for(int i = 0; i < 6; i++) {
 				for(int j = 0; j < 6; j++) {
@@ -171,6 +185,7 @@ public class JogoDaVida {
 				System.out.println("\n");
 			}
 			
+			@SuppressWarnings("resource")
 			Scanner input = new Scanner(System.in); 
 		    System.out.println("Pressione: \n(1) para continuar \n(Outro) para terminar o programa");
 		    int read = input.nextInt();
@@ -184,7 +199,7 @@ public class JogoDaVida {
 		    		break;		
 		    }
 		    else if(failure(board, auxBoard) == true) {
-		    	System.out.println("O jogo chegou a um estado de impasse \n Finalizando...");
+		    	System.out.println("O jogo chegou a um estado de impasse \nFinalizando...");
 	    		break;
 		    }
 		}
