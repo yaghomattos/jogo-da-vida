@@ -1,10 +1,11 @@
-import static org.junit.jupiter.api.Assertions.*;
+package project;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class JogoDaVidaTest {
+public class JogoDaVidaTest {
 	
-	public int vivos(int testBoard[][], int i, int j) {
+	public static int vivos(int testBoard[][], int i, int j) {
 		int vivos = 0;
 		
 		if(!JogoDaVida.emptyBoard(testBoard)) {
@@ -77,7 +78,7 @@ class JogoDaVidaTest {
 		return vivos;	
 	}
 
-	public int vizinhos(int i, int j) {
+	public static int vizinhos(int i, int j) {
 		if(i == 0 && j == 0 || i == 0 && j == 5 || i == 5 && j == 5 || i == 5 && j == 5) {
 			return 3;
 		}
@@ -91,7 +92,7 @@ class JogoDaVidaTest {
 	}
 	
 	@Test
-	void ClassesEq_CT1() {
+	public void classesEquivalencia_CT1() {
 		int testBoard[][] = new int[6][6];
 		int auxBoard[][] = new int [6][6]; 
 		boolean morto = true;
@@ -115,7 +116,7 @@ class JogoDaVidaTest {
 		assertEquals(true, morto);
 	}
 	@Test
-	void ClassesEq_CT2() {
+	public void classesEquivalencia_CT2() {
 		int testBoard[][] = new int[6][6];
 		int auxBoard[][] = new int [6][6]; 
 		boolean morto = true;
@@ -138,7 +139,7 @@ class JogoDaVidaTest {
 		assertEquals(true, morto);
 	}
 	@Test
-	void ClassesEq_CT3() {
+	public void classesEquivalencia_CT3() {
 		int testBoard[][] = new int[6][6];
 		int auxBoard[][] = new int [6][6]; 
 		boolean vivo = true;
@@ -161,7 +162,7 @@ class JogoDaVidaTest {
 		assertEquals(true, vivo);
 	}
 	@Test
-	void ClassesEq_CT4() {
+	public void classesEquivalencia_CT4() {
 		int testBoard[][] = new int[6][6];
 		int auxBoard[][] = new int [6][6]; 
 		boolean morto = true;
@@ -184,7 +185,7 @@ class JogoDaVidaTest {
 		assertEquals(true, morto);
 	}
 	@Test
-	void ClassesEq_CT5() {
+	public void classesEquivalencia_CT5() {
 		int testBoard[][] = new int[6][6];
 		int auxBoard[][] = new int [6][6]; 
 		boolean invalido = true;
@@ -207,7 +208,7 @@ class JogoDaVidaTest {
 		assertEquals(true, invalido);	
 	}
 	@Test
-	void ClassesEq_CT6() {
+	public void classesEquivalencia_CT6() {
 		int testBoard[][] = new int[6][6];
 		int auxBoard[][] = new int [6][6]; 
 		boolean invalido = true;
@@ -230,7 +231,7 @@ class JogoDaVidaTest {
 		assertEquals(true, invalido);
 	}
 	@Test
-	void ClassesEq_CT7() {
+	public void classesEquivalencia_CT7() {
 		int testBoard[][] = new int[6][6];
 		int auxBoard[][] = new int [6][6]; 
 		boolean invalido = true;
@@ -253,7 +254,7 @@ class JogoDaVidaTest {
 		assertEquals(true, invalido);
 	}
 	@Test
-	void ClassesEq_CT8() {
+	public void classesEquivalencia_CT8() {
 		int testBoard[][] = new int[6][6];
 		int auxBoard[][] = new int [6][6]; 
 		boolean invalido = true;
@@ -264,6 +265,378 @@ class JogoDaVidaTest {
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
 				if(vizinhos(i, j) == 9 && vivos(testBoard, i, j) == 9) {
+					JogoDaVida.newState(auxBoard, testBoard);
+					
+					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
+					
+					int C = testBoard[i][j];
+					if(C < 0 || C >= 1) invalido = false;	
+				}
+			}
+		}
+		assertEquals(true, invalido);
+	}
+	
+	@Test
+	public void valorLimite_CT1() {
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean morto = true;
+		
+		testBoard = JogoDaVida.initialRandom(2);
+		auxBoard = testBoard;
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				if(vizinhos(i, j) == 3 && vivos(testBoard, i, j) == 0) {
+					//System.out.println("[" + i + "][" + j + "]" + " = " + testBoard[i][j]);
+					JogoDaVida.newState(auxBoard, testBoard);
+					
+					if(JogoDaVida.failure(testBoard, auxBoard) == false) morto = false;
+					
+					int C = testBoard[i][j];
+					if(C < 0 || C >= 1) morto = false;	
+				}
+			}
+		}
+		assertEquals(true, morto);
+	}
+	@Test
+	public void valorLimite_CT2() {
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean morto = true;
+		
+		testBoard = JogoDaVida.initialRandom(2);
+		auxBoard = testBoard;
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				if(vizinhos(i, j) == 5 && vivos(testBoard, i, j) == 1) {
+					JogoDaVida.newState(auxBoard, testBoard);
+					
+					if(JogoDaVida.failure(testBoard, auxBoard) == false) morto = false;
+					
+					int C = testBoard[i][j];
+					if(C < 0 || C >= 1) morto = false;	
+				}
+			}
+		}
+		assertEquals(true, morto);
+	}
+	@Test
+	public void valorLimite_CT3() {
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean vivo = true;
+		
+		testBoard = JogoDaVida.initialRandom(2);
+		auxBoard = testBoard;
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				if(vizinhos(i, j) == 8 && vivos(testBoard, i, j) == 7) {
+					JogoDaVida.newState(auxBoard, testBoard);
+					
+					if(JogoDaVida.failure(testBoard, auxBoard) == false) vivo = false;
+					
+					int C = testBoard[i][j];
+					if(C <= 0 || C > 1) vivo = false;	
+				}
+			}
+		}
+		assertEquals(true, vivo);
+	}
+	@Test
+	public void valorLimite_CT4() {
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean morto = true;
+		
+		testBoard = JogoDaVida.initialRandom(2);
+		auxBoard = testBoard;
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				if(vizinhos(i, j) == 8 && vivos(testBoard, i, j) == 8) {
+					JogoDaVida.newState(auxBoard, testBoard);
+					
+					if(JogoDaVida.failure(testBoard, auxBoard) == false) morto = false;
+					
+					int C = testBoard[i][j];
+					if(C < 0 || C >= 1) morto = false;	
+				}
+			}
+		}
+		assertEquals(true, morto);
+	}
+	@Test
+	public void valorLimite_CT5() {
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean invalido = true;
+		
+		testBoard = JogoDaVida.initialRandom(-2);
+		auxBoard = testBoard;
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				if(vizinhos(i, j) == 2 && vivos(testBoard, i, j) == -1) {
+					JogoDaVida.newState(auxBoard, testBoard);
+					
+					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
+					
+					int C = testBoard[i][j];
+					if(C < 0 || C >= 1) invalido = false;	
+				}
+			}
+		}
+		assertEquals(true, invalido);	
+	}
+	@Test
+	public void valorLimite_CT6() {
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean invalido = true;
+		
+		testBoard = JogoDaVida.initialRandom(3);
+		auxBoard = testBoard;
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				if(vizinhos(i, j) == 4 && vivos(testBoard, i, j) == 9) {
+					JogoDaVida.newState(auxBoard, testBoard);
+					
+					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
+					
+					int C = testBoard[i][j];
+					if(C < 0 || C >= 1) invalido = false;	
+				}
+			}
+		}
+		assertEquals(true, invalido);
+	}
+	@Test
+	public void valorLimite_CT7() {
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean invalido = true;
+		
+		testBoard = JogoDaVida.initialRandom(3);
+		auxBoard = testBoard;
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				if(vizinhos(i, j) == 6 && vivos(testBoard, i, j) == 9) {
+					JogoDaVida.newState(auxBoard, testBoard);
+					
+					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
+					
+					int C = testBoard[i][j];
+					if(C < 0 || C >= 1) invalido = false;	
+				}
+			}
+		}
+		assertEquals(true, invalido);
+	}
+	@Test
+	public void valorLimite_CT8() {
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean invalido = true;
+		
+		testBoard = JogoDaVida.initialRandom(3);
+		auxBoard = testBoard;
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				if(vizinhos(i, j) == 7 && vivos(testBoard, i, j) == 9) {
+					JogoDaVida.newState(auxBoard, testBoard);
+					
+					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
+					
+					int C = testBoard[i][j];
+					if(C < 0 || C >= 1) invalido = false;	
+				}
+			}
+		}
+		assertEquals(true, invalido);
+	}
+	@Test
+	public void valorLimite_CT9() {
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean invalido = true;
+		
+		testBoard = JogoDaVida.initialRandom(3);
+		auxBoard = testBoard;
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				if(vizinhos(i, j) == 9 && vivos(testBoard, i, j) == 9) {
+					JogoDaVida.newState(auxBoard, testBoard);
+					
+					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
+					
+					int C = testBoard[i][j];
+					if(C < 0 || C >= 1) invalido = false;	
+				}
+			}
+		}
+		assertEquals(true, invalido);
+	}
+	
+	@Test
+	public void causaEfeito_CT1() {
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean morto = true;
+		
+		testBoard = JogoDaVida.initialRandom(2);
+		auxBoard = testBoard;
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				if(vizinhos(i, j) == 5 && vivos(testBoard, i, j) == 2) {
+					//System.out.println("[" + i + "][" + j + "]" + " = " + testBoard[i][j]);
+					JogoDaVida.newState(auxBoard, testBoard);
+					
+					if(JogoDaVida.failure(testBoard, auxBoard) == false) morto = false;
+					
+					int C = testBoard[i][j];
+					if(C < 0 || C >= 1) morto = false;	
+				}
+			}
+		}
+		assertEquals(true, morto);
+	}
+	@Test
+	public void causaEfeito_CT2() {
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean morto = true;
+		
+		testBoard = JogoDaVida.initialRandom(2);
+		auxBoard = testBoard;
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				if(vizinhos(i, j) == 5 && vivos(testBoard, i, j) == 9) {
+					JogoDaVida.newState(auxBoard, testBoard);
+					
+					if(JogoDaVida.failure(testBoard, auxBoard) == false) morto = false;
+					
+					int C = testBoard[i][j];
+					if(C < 0 || C >= 1) morto = false;	
+				}
+			}
+		}
+		assertEquals(true, morto);
+	}
+	@Test
+	public void causaEfeito_CT3() {
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean vivo = true;
+		
+		testBoard = JogoDaVida.initialRandom(2);
+		auxBoard = testBoard;
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				if(vizinhos(i, j) == 2 && vivos(testBoard, i, j) == 1) {
+					JogoDaVida.newState(auxBoard, testBoard);
+					
+					if(JogoDaVida.failure(testBoard, auxBoard) == false) vivo = false;
+					
+					int C = testBoard[i][j];
+					if(C <= 0 || C > 1) vivo = false;	
+				}
+			}
+		}
+		assertEquals(true, vivo);
+	}
+	@Test
+	public void causaEfeito_CT4() {
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean morto = true;
+		
+		testBoard = JogoDaVida.initialRandom(4);
+		auxBoard = testBoard;
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				if(vizinhos(i, j) == 2 && vivos(testBoard, i, j) == 1) {
+					JogoDaVida.newState(auxBoard, testBoard);
+					
+					if(JogoDaVida.failure(testBoard, auxBoard) == false) morto = false;
+					
+					int C = testBoard[i][j];
+					if(C < 0 || C >= 1) morto = false;	
+				}
+			}
+		}
+		assertEquals(true, morto);
+	}
+	@Test
+	public void causaEfeito_CT5() {
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean invalido = true;
+		
+		testBoard = JogoDaVida.initialRandom(2);
+		auxBoard = testBoard;
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				if(vizinhos(i, j) == 2 && vivos(testBoard, i, j) == 9) {
+					JogoDaVida.newState(auxBoard, testBoard);
+					
+					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
+					
+					int C = testBoard[i][j];
+					if(C < 0 || C >= 1) invalido = false;	
+				}
+			}
+		}
+		assertEquals(true, invalido);	
+	}
+	@Test
+	public void causaEfeito_CT6() {
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean invalido = true;
+		
+		testBoard = JogoDaVida.initialRandom(4);
+		auxBoard = testBoard;
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				if(vizinhos(i, j) == 5 && vivos(testBoard, i, j) == 9) {
+					JogoDaVida.newState(auxBoard, testBoard);
+					
+					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
+					
+					int C = testBoard[i][j];
+					if(C < 0 || C >= 1) invalido = false;	
+				}
+			}
+		}
+		assertEquals(true, invalido);
+	}
+	@Test
+	public void causaEfeito_CT7() {
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean invalido = true;
+		
+		testBoard = JogoDaVida.initialRandom(4);
+		auxBoard = testBoard;
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				if(vizinhos(i, j) == 4 && vivos(testBoard, i, j) == 2) {
 					JogoDaVida.newState(auxBoard, testBoard);
 					
 					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
