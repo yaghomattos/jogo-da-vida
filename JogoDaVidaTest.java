@@ -1,6 +1,7 @@
 package project;
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class JogoDaVidaTest {
@@ -91,6 +92,7 @@ public class JogoDaVidaTest {
 		}
 	}
 	
+	//TestSet-Func
 	@Test
 	public void classesEquivalencia_CT1() {
 		int testBoard[][] = new int[6][6];
@@ -100,14 +102,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(2);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
 				if(vizinhos(i, j) == 3 && vivos(testBoard, i, j) == 0) {
-					//System.out.println("[" + i + "][" + j + "]" + " = " + testBoard[i][j]);
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) morto = false;
-					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) morto = false;	
 				}
@@ -124,13 +123,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(2);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
-				if(vizinhos(i, j) == 5 && vivos(testBoard, i, j) == 2) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) morto = false;
-					
+				if(vizinhos(i, j) == 5 && vivos(testBoard, i, j) == 2) {					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) morto = false;	
 				}
@@ -147,13 +144,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(2);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+				
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
-				if(vizinhos(i, j) == 8 && vivos(testBoard, i, j) == 4) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) vivo = false;
-					
+				if(vizinhos(i, j) == 8 && vivos(testBoard, i, j) == 4) {				
 					int C = testBoard[i][j];
 					if(C <= 0 || C > 1) vivo = false;	
 				}
@@ -170,13 +165,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(2);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
 				if(vizinhos(i, j) == 8 && vivos(testBoard, i, j) == 3) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) morto = false;
-					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) morto = false;	
 				}
@@ -193,13 +186,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(-2);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
-				if(vizinhos(i, j) == 2 && vivos(testBoard, i, j) == -1) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
-					
+				if(vizinhos(i, j) == 2 && vivos(testBoard, i, j) == -1) {					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) invalido = false;	
 				}
@@ -216,13 +207,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(3);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
 				if(vizinhos(i, j) == 4 && vivos(testBoard, i, j) == -1) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
-					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) invalido = false;	
 				}
@@ -239,13 +228,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(3);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
 				if(vizinhos(i, j) == 6 && vivos(testBoard, i, j) == -1) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
-					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) invalido = false;	
 				}
@@ -262,13 +249,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(3);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
-				if(vizinhos(i, j) == 9 && vivos(testBoard, i, j) == 9) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
-					
+				if(vizinhos(i, j) == 9 && vivos(testBoard, i, j) == 9) {				
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) invalido = false;	
 				}
@@ -286,14 +271,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(2);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
-				if(vizinhos(i, j) == 3 && vivos(testBoard, i, j) == 0) {
-					//System.out.println("[" + i + "][" + j + "]" + " = " + testBoard[i][j]);
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) morto = false;
-					
+				if(vizinhos(i, j) == 3 && vivos(testBoard, i, j) == 0) {					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) morto = false;	
 				}
@@ -310,13 +292,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(2);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
 				if(vizinhos(i, j) == 5 && vivos(testBoard, i, j) == 1) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) morto = false;
-					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) morto = false;	
 				}
@@ -333,13 +313,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(2);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+				
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
 				if(vizinhos(i, j) == 8 && vivos(testBoard, i, j) == 7) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) vivo = false;
-					
 					int C = testBoard[i][j];
 					if(C <= 0 || C > 1) vivo = false;	
 				}
@@ -356,13 +334,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(2);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
-				if(vizinhos(i, j) == 8 && vivos(testBoard, i, j) == 8) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) morto = false;
-					
+				if(vizinhos(i, j) == 8 && vivos(testBoard, i, j) == 8) {			
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) morto = false;	
 				}
@@ -379,13 +355,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(-2);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
-				if(vizinhos(i, j) == 2 && vivos(testBoard, i, j) == -1) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
-					
+				if(vizinhos(i, j) == 2 && vivos(testBoard, i, j) == -1) {					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) invalido = false;	
 				}
@@ -402,13 +376,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(3);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
-				if(vizinhos(i, j) == 4 && vivos(testBoard, i, j) == 9) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
-					
+				if(vizinhos(i, j) == 4 && vivos(testBoard, i, j) == 9) {					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) invalido = false;	
 				}
@@ -425,13 +397,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(3);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
-				if(vizinhos(i, j) == 6 && vivos(testBoard, i, j) == 9) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
-					
+				if(vizinhos(i, j) == 6 && vivos(testBoard, i, j) == 9) {					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) invalido = false;	
 				}
@@ -448,13 +418,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(3);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
-				if(vizinhos(i, j) == 7 && vivos(testBoard, i, j) == 9) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
-					
+				if(vizinhos(i, j) == 7 && vivos(testBoard, i, j) == 9) {					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) invalido = false;	
 				}
@@ -471,13 +439,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(3);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
 				if(vizinhos(i, j) == 9 && vivos(testBoard, i, j) == 9) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
-					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) invalido = false;	
 				}
@@ -495,14 +461,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(2);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
 				if(vizinhos(i, j) == 5 && vivos(testBoard, i, j) == 2) {
-					//System.out.println("[" + i + "][" + j + "]" + " = " + testBoard[i][j]);
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) morto = false;
-					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) morto = false;	
 				}
@@ -519,13 +482,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(2);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
 				if(vizinhos(i, j) == 5 && vivos(testBoard, i, j) == 9) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) morto = false;
-					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) morto = false;	
 				}
@@ -542,13 +503,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(2);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+				
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
 				if(vizinhos(i, j) == 2 && vivos(testBoard, i, j) == 1) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) vivo = false;
-					
 					int C = testBoard[i][j];
 					if(C <= 0 || C > 1) vivo = false;	
 				}
@@ -565,13 +524,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(4);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
 				if(vizinhos(i, j) == 2 && vivos(testBoard, i, j) == 1) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) morto = false;
-					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) morto = false;	
 				}
@@ -588,13 +545,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(2);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
-				if(vizinhos(i, j) == 2 && vivos(testBoard, i, j) == 9) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
-					
+				if(vizinhos(i, j) == 2 && vivos(testBoard, i, j) == 9) {				
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) invalido = false;	
 				}
@@ -611,13 +566,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(4);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
 				if(vizinhos(i, j) == 5 && vivos(testBoard, i, j) == 9) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
-					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) invalido = false;	
 				}
@@ -634,13 +587,11 @@ public class JogoDaVidaTest {
 		testBoard = JogoDaVida.initialRandom(4);
 		auxBoard = testBoard;
 		
+		JogoDaVida.newState(auxBoard, testBoard);
+		
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
-				if(vizinhos(i, j) == 4 && vivos(testBoard, i, j) == 2) {
-					JogoDaVida.newState(auxBoard, testBoard);
-					
-					if(JogoDaVida.failure(testBoard, auxBoard) == false) invalido = false;
-					
+				if(vizinhos(i, j) == 4 && vivos(testBoard, i, j) == 2) {					
 					int C = testBoard[i][j];
 					if(C < 0 || C >= 1) invalido = false;	
 				}
@@ -648,4 +599,5 @@ public class JogoDaVidaTest {
 		}
 		assertEquals(true, invalido);
 	}
+	//TestSet-Func
 }
