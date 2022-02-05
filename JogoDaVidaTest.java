@@ -600,4 +600,63 @@ public class JogoDaVidaTest {
 		assertEquals(true, invalido);
 	}
 	//TestSet-Func
+	
+	//TestSet-Estr
+	@Test
+	public void estrutural_CT1(){
+		int testBoard[][] = new int[6][6];
+		boolean falso = true;
+		
+		testBoard = JogoDaVida.initialRandom(100);
+		
+		if(JogoDaVida.emptyBoard(testBoard) == true) falso = false;
+		
+		assertEquals(true, falso);
+	}
+	
+	@Test
+	public void estrutural_CT2(){
+		int testBoard[][] = new int[6][6];
+		boolean verdadeiro = true;
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				testBoard[i][j] = 0;
+			}
+		}
+		
+		if(JogoDaVida.emptyBoard(testBoard) == false) verdadeiro = false;
+		
+		assertEquals(true, verdadeiro);
+	}
+	
+	@Test
+	public void estrutural_CT3(){
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean falso = true;
+		
+		testBoard = JogoDaVida.initialRandom(2);
+		auxBoard = testBoard;
+
+		if(JogoDaVida.failure(testBoard, auxBoard) == false) falso = false;
+		
+		assertEquals(true, falso);
+	}
+	
+	@Test
+	public void estrutural_CT4(){
+		int testBoard[][] = new int[6][6];
+		int auxBoard[][] = new int [6][6]; 
+		boolean verdadeiro = true;
+		
+		testBoard = JogoDaVida.initialRandom(2);
+		auxBoard = JogoDaVida.initialRandom(4);
+
+		if(JogoDaVida.failure(testBoard, auxBoard) == true) verdadeiro = false;
+		
+		assertEquals(true, verdadeiro);
+		
+	}
+	//TestSet-Estr
 }
